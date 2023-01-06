@@ -1,0 +1,4996 @@
+{
+    "__inputs": [
+      {
+        "name": "DS_LOKI",
+        "label": "Loki",
+        "description": "",
+        "type": "datasource",
+        "pluginId": "loki",
+        "pluginName": "Loki"
+      }
+    ],
+    "__elements": {},
+    "__requires": [
+      {
+        "type": "grafana",
+        "id": "grafana",
+        "name": "Grafana",
+        "version": "9.3.1"
+      },
+      {
+        "type": "panel",
+        "id": "logs",
+        "name": "Logs",
+        "version": ""
+      },
+      {
+        "type": "datasource",
+        "id": "loki",
+        "name": "Loki",
+        "version": "1.0.0"
+      },
+      {
+        "type": "panel",
+        "id": "piechart",
+        "name": "Pie chart",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "stat",
+        "name": "Stat",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "table",
+        "name": "Table",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "timeseries",
+        "name": "Time series",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Nextcloud audit log stats",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 17,
+        "panels": [],
+        "title": "Total Stats",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 0,
+          "y": 1
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by(instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login successful.*\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Successful Login",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "purple",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 6,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by(instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | __error__=\"\" [$__interval]))",
+            "hide": false,
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Failed Login",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {}
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "purple",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 9,
+          "y": 1
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "count by (remoteAddr) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | __error__=\"\" [$__interval]))",
+            "hide": false,
+            "legendFormat": "{{ ip }}",
+            "queryType": "range",
+            "refId": "A",
+            "resolution": 1
+          }
+        ],
+        "title": "Total Failed - Unique IP",
+        "transformations": [
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "Unique IP",
+              "mode": "reduceRow",
+              "reduce": {
+                "include": [
+                  "Value"
+                ],
+                "reducer": "count"
+              },
+              "replaceFields": true
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 13,
+          "y": 1
+        },
+        "id": 8,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Nextcloud Log Lines",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "decbytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 16,
+          "y": 1
+        },
+        "id": 10,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (bytes_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Nextcloud Log in bytes",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "super-light-purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 4,
+          "x": 0,
+          "y": 5
+        },
+        "id": 18,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST|PUT|MKCOL\" | message=~\"File written.*\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Uploaded Files",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "super-light-purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 4,
+          "y": 5
+        },
+        "id": 20,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\"File deleted.*\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Deleted Files",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "super-light-purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 7,
+          "y": 5
+        },
+        "id": 19,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"MOVE\" | message=~\"File renamed.*\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Moved/Renamed Files",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "super-light-purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 10,
+          "y": 5
+        },
+        "id": 21,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"PUT|GET\" | message=~\"File accessed.*|Preview accessed.*\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Accessed Files",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "level 1 in log",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 13,
+          "y": 5
+        },
+        "id": 70,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"1\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "INFO Log Lines",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "level 2 in log",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "yellow",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 16,
+          "y": 5
+        },
+        "id": 71,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"2\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "WARNING Log Lines",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "super-light-purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 4,
+          "x": 0,
+          "y": 8
+        },
+        "id": 24,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url=~\".*download.*\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Downloaded Shared Files",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "super-light-purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 4,
+          "y": 8
+        },
+        "id": 23,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url!~\".*download.*\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Accessed Shared Files",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "super-light-purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 7,
+          "y": 8
+        },
+        "id": 22,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST\" | message=~\".*shared.*\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Shared Files",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "super-light-purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 10,
+          "y": 8
+        },
+        "id": 25,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\".*unshared.*\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Unshared Files",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "level 3 in log",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "super-light-red",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 13,
+          "y": 8
+        },
+        "id": 72,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"3\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "ERROR Log Lines",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "level 4 in log",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 16,
+          "y": 8
+        },
+        "id": 73,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"4\" | __error__=\"\" [$__interval]))",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "FATAL Log Lines",
+        "transformations": [],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 7,
+          "x": 0,
+          "y": 11
+        },
+        "id": 15,
+        "options": {
+          "displayLabels": [],
+          "legend": {
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.2.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login successful.*\" | __error__=\"\" [$__interval]))",
+            "hide": false,
+            "legendFormat": "{{ user }}",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Successful Login by User",
+        "transformations": [],
+        "type": "piechart"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "gridPos": {
+          "h": 21,
+          "w": 16,
+          "x": 7,
+          "y": 11
+        },
+        "id": 13,
+        "options": {
+          "dedupStrategy": "signature",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": true,
+          "sortOrder": "Descending",
+          "wrapLogMessage": false
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"1\" | line_format \"➡️❕ IP {{.remoteAddr}} {{.method}} {{.url }} with 👤 {{.user}} 💬 {{.message }} \"",
+            "hide": false,
+            "queryType": "range",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"2\" | line_format \"➡️⚠️ IP {{.remoteAddr}} {{.method}} {{.url }} with 👤 {{.user}} 💬 {{.message }} \"",
+            "hide": false,
+            "queryType": "range",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"3\" | line_format \"➡️🚨 IP {{.remoteAddr}} {{.method}} {{.url }} with 👤 {{.user}} 💬 {{.message }} \"",
+            "hide": false,
+            "queryType": "range",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"4\" | line_format \"➡️☠️ IP {{.remoteAddr}} {{.method}} {{.url }} with 👤 {{.user}} 💬 {{.message }} \"",
+            "hide": false,
+            "queryType": "range",
+            "refId": "D"
+          }
+        ],
+        "title": "Nextcloud Recent Log",
+        "type": "logs"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 7,
+          "x": 0,
+          "y": 19
+        },
+        "id": 29,
+        "options": {
+          "displayLabels": [],
+          "legend": {
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.2.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (username) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | pattern `<_>Login failed: <username> (Remote IP: <_>` | __error__=\"\" [$__interval]))",
+            "hide": false,
+            "legendFormat": "{{ username }}",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Failed Login by User",
+        "transformations": [],
+        "type": "piechart"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 32
+        },
+        "id": 39,
+        "panels": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "$datasource"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "bars",
+                  "fillOpacity": 39,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "smooth",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "log": 2,
+                    "type": "log"
+                  },
+                  "showPoints": "always",
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "short"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 23,
+              "x": 0,
+              "y": 33
+            },
+            "id": 41,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "sum"
+                ],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "8.0.0-beta3",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login successful.*\" | __error__=\"\" [$__interval]))",
+                "legendFormat": "{{ user }}",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Successful Login by User - Overtime",
+            "transformations": [],
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Nextcloud Version"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 156
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "IP"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 140
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "User"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 157
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 204
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Request ID"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 285
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Uploaded File"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 335
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 23,
+              "x": 0,
+              "y": 41
+            },
+            "id": 40,
+            "options": {
+              "footer": {
+                "enablePagination": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "9.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
+                },
+                "editorMode": "code",
+                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login successful.*\" | __error__=\"\"",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Successful Login - Details",
+            "transformations": [
+              {
+                "id": "extractFields",
+                "options": {
+                  "format": "json",
+                  "replace": true,
+                  "source": "labels"
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "app": true,
+                    "data_app": true,
+                    "env": true,
+                    "filename": true,
+                    "instance": true,
+                    "job": true,
+                    "level": true,
+                    "message": true,
+                    "method": true,
+                    "reqId": false,
+                    "time": false,
+                    "url": true
+                  },
+                  "indexByName": {
+                    "app": 5,
+                    "data_app": 6,
+                    "deleted_file": 4,
+                    "env": 7,
+                    "filename": 8,
+                    "instance": 9,
+                    "job": 10,
+                    "level": 11,
+                    "message": 13,
+                    "method": 14,
+                    "remoteAddr": 2,
+                    "reqId": 3,
+                    "time": 0,
+                    "url": 15,
+                    "user": 1,
+                    "userAgent": 16,
+                    "version": 12
+                  },
+                  "renameByName": {
+                    "deleted_file": "Deleted File",
+                    "env": "",
+                    "instance": "",
+                    "message": "",
+                    "method": "",
+                    "remoteAddr": "IP",
+                    "reqId": "Request ID",
+                    "time": "Time",
+                    "uploaded_file": "Uploaded File",
+                    "url": "",
+                    "user": "User",
+                    "userAgent": "User Agent",
+                    "version": "Nextcloud Version"
+                  }
+                }
+              },
+              {
+                "id": "sortBy",
+                "options": {
+                  "fields": {},
+                  "sort": [
+                    {
+                      "desc": true,
+                      "field": "Time"
+                    }
+                  ]
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Successful Login Stats",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 33
+        },
+        "id": 43,
+        "panels": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "$datasource"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "bars",
+                  "fillOpacity": 39,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "smooth",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "log": 2,
+                    "type": "log"
+                  },
+                  "showPoints": "always",
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "short"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 23,
+              "x": 0,
+              "y": 34
+            },
+            "id": 44,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "sum"
+                ],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "8.0.0-beta3",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum by (username) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | pattern `<_>Login failed: <username> (Remote IP: <_>` | __error__=\"\" [$__interval]))",
+                "legendFormat": "{{ username }}",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Failed Login by User - Overtime",
+            "transformations": [],
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Nextcloud Version"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 156
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "IP"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 140
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "User"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 181
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 204
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Request ID"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 285
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Uploaded File"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 335
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 23,
+              "x": 0,
+              "y": 42
+            },
+            "id": 45,
+            "options": {
+              "footer": {
+                "enablePagination": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "9.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
+                },
+                "editorMode": "code",
+                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | pattern `<_>Login failed: <username> (Remote IP: <_>` | __error__=\"\"",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Failed Login - Details",
+            "transformations": [
+              {
+                "id": "extractFields",
+                "options": {
+                  "format": "json",
+                  "replace": true,
+                  "source": "labels"
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "app": true,
+                    "data_app": true,
+                    "env": true,
+                    "filename": true,
+                    "instance": true,
+                    "job": true,
+                    "level": true,
+                    "message": true,
+                    "method": true,
+                    "reqId": false,
+                    "time": false,
+                    "url": true,
+                    "user": true
+                  },
+                  "indexByName": {
+                    "app": 4,
+                    "env": 5,
+                    "filename": 6,
+                    "instance": 7,
+                    "job": 8,
+                    "level": 9,
+                    "message": 11,
+                    "method": 12,
+                    "remoteAddr": 2,
+                    "reqId": 3,
+                    "time": 0,
+                    "url": 13,
+                    "user": 15,
+                    "userAgent": 14,
+                    "username": 1,
+                    "version": 10
+                  },
+                  "renameByName": {
+                    "deleted_file": "Deleted File",
+                    "env": "",
+                    "instance": "",
+                    "message": "",
+                    "method": "",
+                    "remoteAddr": "IP",
+                    "reqId": "Request ID",
+                    "time": "Time",
+                    "uploaded_file": "Uploaded File",
+                    "url": "",
+                    "user": "User",
+                    "userAgent": "User Agent",
+                    "username": "User",
+                    "version": "Nextcloud Version"
+                  }
+                }
+              },
+              {
+                "id": "sortBy",
+                "options": {
+                  "fields": {},
+                  "sort": [
+                    {
+                      "desc": true,
+                      "field": "Time"
+                    }
+                  ]
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Failed Login Stats",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 34
+        },
+        "id": 27,
+        "panels": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "$datasource"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "bars",
+                  "fillOpacity": 39,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "smooth",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "log": 2,
+                    "type": "log"
+                  },
+                  "showPoints": "always",
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "short"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 23,
+              "x": 0,
+              "y": 35
+            },
+            "id": 33,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "sum"
+                ],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "8.0.0-beta3",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST|PUT|MKCOL\" | message=~\"File written.*\" | __error__=\"\" [$__interval]))",
+                "legendFormat": "{{ user }}",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Uploaded Files by User - Overtime",
+            "transformations": [],
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Nextcloud Version"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 156
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "IP"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 140
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "User"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 157
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 204
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Request ID"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 285
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Uploaded File"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 335
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 23,
+              "x": 0,
+              "y": 43
+            },
+            "id": 31,
+            "options": {
+              "footer": {
+                "enablePagination": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "9.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
+                },
+                "editorMode": "code",
+                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST|PUT|MKCOL\" | message=~\"File written.*\" | pattern `<_>File written to: \\\"<uploaded_file>\\\"\"<_>` | __error__=\"\"",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Uploaded Files - Details",
+            "transformations": [
+              {
+                "id": "extractFields",
+                "options": {
+                  "format": "json",
+                  "replace": true,
+                  "source": "labels"
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "app": true,
+                    "data_app": true,
+                    "env": true,
+                    "filename": true,
+                    "instance": true,
+                    "job": true,
+                    "level": true,
+                    "message": true,
+                    "method": true,
+                    "reqId": false,
+                    "time": false,
+                    "url": true
+                  },
+                  "indexByName": {
+                    "app": 5,
+                    "data_app": 6,
+                    "env": 7,
+                    "filename": 8,
+                    "instance": 9,
+                    "job": 10,
+                    "level": 11,
+                    "message": 13,
+                    "method": 14,
+                    "remoteAddr": 2,
+                    "reqId": 3,
+                    "time": 0,
+                    "uploaded_file": 4,
+                    "url": 15,
+                    "user": 1,
+                    "userAgent": 16,
+                    "version": 12
+                  },
+                  "renameByName": {
+                    "env": "",
+                    "instance": "",
+                    "message": "",
+                    "method": "",
+                    "remoteAddr": "IP",
+                    "reqId": "Request ID",
+                    "time": "Time",
+                    "uploaded_file": "Uploaded File",
+                    "url": "",
+                    "user": "User",
+                    "userAgent": "User Agent",
+                    "version": "Nextcloud Version"
+                  }
+                }
+              },
+              {
+                "id": "sortBy",
+                "options": {
+                  "fields": {},
+                  "sort": [
+                    {
+                      "desc": true,
+                      "field": "Time"
+                    }
+                  ]
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Upload Stats",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 35
+        },
+        "id": 35,
+        "panels": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "$datasource"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "bars",
+                  "fillOpacity": 39,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "smooth",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "log": 2,
+                    "type": "log"
+                  },
+                  "showPoints": "always",
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "short"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 23,
+              "x": 0,
+              "y": 36
+            },
+            "id": 36,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "sum"
+                ],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "8.0.0-beta3",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\"File deleted.*\" | __error__=\"\" [$__interval]))",
+                "legendFormat": "{{ user }}",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Deleted Files by User - Overtime",
+            "transformations": [],
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Nextcloud Version"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 156
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "IP"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 140
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "User"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 157
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 204
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Request ID"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 285
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Uploaded File"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 335
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 23,
+              "x": 0,
+              "y": 44
+            },
+            "id": 37,
+            "options": {
+              "footer": {
+                "enablePagination": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "9.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
+                },
+                "editorMode": "code",
+                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\"File deleted.*\" | pattern `<_>File deleted: \\\"<deleted_file>\\\"\"<_>` | __error__=\"\"",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Deleted Files - Details",
+            "transformations": [
+              {
+                "id": "extractFields",
+                "options": {
+                  "format": "json",
+                  "replace": true,
+                  "source": "labels"
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "app": true,
+                    "data_app": true,
+                    "env": true,
+                    "filename": true,
+                    "instance": true,
+                    "job": true,
+                    "level": true,
+                    "message": true,
+                    "method": true,
+                    "reqId": false,
+                    "time": false,
+                    "url": true
+                  },
+                  "indexByName": {
+                    "app": 5,
+                    "data_app": 6,
+                    "deleted_file": 4,
+                    "env": 7,
+                    "filename": 8,
+                    "instance": 9,
+                    "job": 10,
+                    "level": 11,
+                    "message": 13,
+                    "method": 14,
+                    "remoteAddr": 2,
+                    "reqId": 3,
+                    "time": 0,
+                    "url": 15,
+                    "user": 1,
+                    "userAgent": 16,
+                    "version": 12
+                  },
+                  "renameByName": {
+                    "deleted_file": "Deleted File",
+                    "env": "",
+                    "instance": "",
+                    "message": "",
+                    "method": "",
+                    "remoteAddr": "IP",
+                    "reqId": "Request ID",
+                    "time": "Time",
+                    "uploaded_file": "Uploaded File",
+                    "url": "",
+                    "user": "User",
+                    "userAgent": "User Agent",
+                    "version": "Nextcloud Version"
+                  }
+                }
+              },
+              {
+                "id": "sortBy",
+                "options": {
+                  "fields": {},
+                  "sort": [
+                    {
+                      "desc": true,
+                      "field": "Time"
+                    }
+                  ]
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Delete Stats",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 36
+        },
+        "id": 51,
+        "panels": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "$datasource"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "bars",
+                  "fillOpacity": 39,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "smooth",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "log": 2,
+                    "type": "log"
+                  },
+                  "showPoints": "always",
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "short"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 23,
+              "x": 0,
+              "y": 37
+            },
+            "id": 52,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "sum"
+                ],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "8.0.0-beta3",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"MOVE\" | message=~\"File renamed.*\" | __error__=\"\" [$__interval]))",
+                "legendFormat": "{{ user }}",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Renamed/Moved Files by User - Overtime",
+            "transformations": [],
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Nextcloud Version"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 156
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "IP"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 140
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "User"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 157
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 204
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Request ID"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 285
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Uploaded File"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 335
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 23,
+              "x": 0,
+              "y": 45
+            },
+            "id": 53,
+            "options": {
+              "footer": {
+                "enablePagination": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "9.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
+                },
+                "editorMode": "code",
+                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"MOVE\" | message=~\"File renamed.*\" | pattern `<_>File renamed: \\\"<original_file>\\\" to \\\"<renamed_or_moved_file>\\\"\"<_>` | __error__=\"\"",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Renamed/Moved Files - Details",
+            "transformations": [
+              {
+                "id": "extractFields",
+                "options": {
+                  "format": "json",
+                  "replace": true,
+                  "source": "labels"
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "app": true,
+                    "data_app": true,
+                    "env": true,
+                    "filename": true,
+                    "instance": true,
+                    "job": true,
+                    "level": true,
+                    "message": true,
+                    "method": true,
+                    "reqId": false,
+                    "time": false,
+                    "url": true
+                  },
+                  "indexByName": {
+                    "app": 6,
+                    "data_app": 7,
+                    "env": 8,
+                    "filename": 9,
+                    "instance": 10,
+                    "job": 11,
+                    "level": 12,
+                    "message": 14,
+                    "method": 15,
+                    "original_file": 4,
+                    "remoteAddr": 2,
+                    "renamed_or_moved_file": 5,
+                    "reqId": 3,
+                    "time": 0,
+                    "url": 16,
+                    "user": 1,
+                    "userAgent": 17,
+                    "version": 13
+                  },
+                  "renameByName": {
+                    "accessed_file": "Accessed File",
+                    "env": "",
+                    "instance": "",
+                    "message": "",
+                    "method": "",
+                    "original_file": "Original File",
+                    "remoteAddr": "IP",
+                    "renamed_or_moved_file": "Renamed/Moved to",
+                    "reqId": "Request ID",
+                    "time": "Time",
+                    "uploaded_file": "Uploaded File",
+                    "url": "",
+                    "user": "User",
+                    "userAgent": "User Agent",
+                    "version": "Nextcloud Version"
+                  }
+                }
+              },
+              {
+                "id": "sortBy",
+                "options": {
+                  "fields": {},
+                  "sort": [
+                    {
+                      "desc": true,
+                      "field": "Time"
+                    }
+                  ]
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Renamed/Moved Stats",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 37
+        },
+        "id": 47,
+        "panels": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "$datasource"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "bars",
+                  "fillOpacity": 39,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "smooth",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "log": 2,
+                    "type": "log"
+                  },
+                  "showPoints": "always",
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "short"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 23,
+              "x": 0,
+              "y": 38
+            },
+            "id": 48,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "sum"
+                ],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "8.0.0-beta3",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"PUT|GET\" | message=~\"File accessed.*|Preview accessed.*\" | __error__=\"\" [$__interval]))",
+                "legendFormat": "{{ user }}",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Accessed Files by User - Overtime",
+            "transformations": [],
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Nextcloud Version"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 156
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "IP"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 140
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "User"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 157
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 204
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Request ID"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 285
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Uploaded File"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 335
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 23,
+              "x": 0,
+              "y": 46
+            },
+            "id": 49,
+            "options": {
+              "footer": {
+                "enablePagination": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "9.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
+                },
+                "editorMode": "code",
+                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"PUT|GET\" | message=~\"File accessed.*|Preview accessed.*\" | pattern `<_>File accessed: \\\"<accessed_file>\\\"\"<_>` | __error__=\"\"",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Accessed Files - Details",
+            "transformations": [
+              {
+                "id": "extractFields",
+                "options": {
+                  "format": "json",
+                  "replace": true,
+                  "source": "labels"
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "app": true,
+                    "data_app": true,
+                    "env": true,
+                    "filename": true,
+                    "instance": true,
+                    "job": true,
+                    "level": true,
+                    "message": true,
+                    "method": true,
+                    "reqId": false,
+                    "time": false,
+                    "url": true
+                  },
+                  "indexByName": {
+                    "accessed_file": 4,
+                    "app": 5,
+                    "data_app": 6,
+                    "env": 7,
+                    "filename": 8,
+                    "instance": 9,
+                    "job": 10,
+                    "level": 11,
+                    "message": 13,
+                    "method": 14,
+                    "remoteAddr": 2,
+                    "reqId": 3,
+                    "time": 0,
+                    "url": 15,
+                    "user": 1,
+                    "userAgent": 16,
+                    "version": 12
+                  },
+                  "renameByName": {
+                    "accessed_file": "Accessed File",
+                    "env": "",
+                    "instance": "",
+                    "message": "",
+                    "method": "",
+                    "remoteAddr": "IP",
+                    "reqId": "Request ID",
+                    "time": "Time",
+                    "uploaded_file": "Uploaded File",
+                    "url": "",
+                    "user": "User",
+                    "userAgent": "User Agent",
+                    "version": "Nextcloud Version"
+                  }
+                }
+              },
+              {
+                "id": "sortBy",
+                "options": {
+                  "fields": {},
+                  "sort": [
+                    {
+                      "desc": true,
+                      "field": "Time"
+                    }
+                  ]
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Accessed Files Stats",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 38
+        },
+        "id": 55,
+        "panels": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "$datasource"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "bars",
+                  "fillOpacity": 39,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "smooth",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "log": 2,
+                    "type": "log"
+                  },
+                  "showPoints": "always",
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "short"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 23,
+              "x": 0,
+              "y": 39
+            },
+            "id": 56,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "sum"
+                ],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "8.0.0-beta3",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST\" | message=~\".*shared.*\" | __error__=\"\" [$__interval]))",
+                "legendFormat": "{{ user }}",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Shared Files by User - Overtime",
+            "transformations": [],
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Nextcloud Version"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 156
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "IP"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 140
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "User"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 157
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 204
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Request ID"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 285
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Uploaded File"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 335
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 23,
+              "x": 0,
+              "y": 47
+            },
+            "id": 57,
+            "options": {
+              "footer": {
+                "enablePagination": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "9.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
+                },
+                "editorMode": "code",
+                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST\" | message=~\".*shared.*\" | pattern `<_>The <_> \\\"<shared_file>\\\" with ID<_>` | __error__=\"\"",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Shared Files - Details",
+            "transformations": [
+              {
+                "id": "extractFields",
+                "options": {
+                  "format": "json",
+                  "replace": true,
+                  "source": "labels"
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "app": true,
+                    "data_app": true,
+                    "env": true,
+                    "filename": true,
+                    "instance": true,
+                    "job": true,
+                    "level": true,
+                    "message": true,
+                    "method": true,
+                    "reqId": false,
+                    "time": false,
+                    "url": true
+                  },
+                  "indexByName": {
+                    "app": 5,
+                    "data_app": 6,
+                    "env": 7,
+                    "filename": 8,
+                    "instance": 9,
+                    "job": 10,
+                    "level": 11,
+                    "message": 13,
+                    "method": 14,
+                    "remoteAddr": 2,
+                    "reqId": 3,
+                    "shared_file": 4,
+                    "time": 0,
+                    "url": 15,
+                    "user": 1,
+                    "userAgent": 16,
+                    "version": 12
+                  },
+                  "renameByName": {
+                    "accessed_file": "Accessed File",
+                    "env": "",
+                    "instance": "",
+                    "message": "",
+                    "method": "",
+                    "remoteAddr": "IP",
+                    "reqId": "Request ID",
+                    "shared_file": "Shared File",
+                    "time": "Time",
+                    "uploaded_file": "Uploaded File",
+                    "url": "",
+                    "user": "User",
+                    "userAgent": "User Agent",
+                    "version": "Nextcloud Version"
+                  }
+                }
+              },
+              {
+                "id": "sortBy",
+                "options": {
+                  "fields": {},
+                  "sort": [
+                    {
+                      "desc": true,
+                      "field": "Time"
+                    }
+                  ]
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Shared Files Stats",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 39
+        },
+        "id": 59,
+        "panels": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "$datasource"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "bars",
+                  "fillOpacity": 39,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "smooth",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "log": 2,
+                    "type": "log"
+                  },
+                  "showPoints": "always",
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "short"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 23,
+              "x": 0,
+              "y": 40
+            },
+            "id": 60,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "sum"
+                ],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "8.0.0-beta3",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\".*unshared.*\" | __error__=\"\" [$__interval]))",
+                "legendFormat": "{{ user }}",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Unshared Files by User - Overtime",
+            "transformations": [],
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Nextcloud Version"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 156
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "IP"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 140
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "User"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 157
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 204
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Request ID"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 285
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Uploaded File"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 335
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 23,
+              "x": 0,
+              "y": 48
+            },
+            "id": 61,
+            "options": {
+              "footer": {
+                "enablePagination": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "9.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
+                },
+                "editorMode": "code",
+                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\".*unshared.*\" | pattern `<_>The <_> \\\"<unshared_file>\\\" with ID<_>` | __error__=\"\"",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Unshared Files - Details",
+            "transformations": [
+              {
+                "id": "extractFields",
+                "options": {
+                  "format": "json",
+                  "replace": true,
+                  "source": "labels"
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "app": true,
+                    "data_app": true,
+                    "env": true,
+                    "filename": true,
+                    "instance": true,
+                    "job": true,
+                    "level": true,
+                    "message": true,
+                    "method": true,
+                    "reqId": false,
+                    "time": false,
+                    "url": true
+                  },
+                  "indexByName": {
+                    "app": 5,
+                    "data_app": 6,
+                    "env": 7,
+                    "filename": 8,
+                    "instance": 9,
+                    "job": 10,
+                    "level": 11,
+                    "message": 13,
+                    "method": 14,
+                    "remoteAddr": 2,
+                    "reqId": 3,
+                    "time": 0,
+                    "unshared_file": 4,
+                    "url": 15,
+                    "user": 1,
+                    "userAgent": 16,
+                    "version": 12
+                  },
+                  "renameByName": {
+                    "accessed_file": "Accessed File",
+                    "env": "",
+                    "instance": "",
+                    "message": "",
+                    "method": "",
+                    "remoteAddr": "IP",
+                    "reqId": "Request ID",
+                    "shared_file": "Shared File",
+                    "time": "Time",
+                    "unshared_file": "Unshared File",
+                    "uploaded_file": "Uploaded File",
+                    "url": "",
+                    "user": "User",
+                    "userAgent": "User Agent",
+                    "version": "Nextcloud Version"
+                  }
+                }
+              },
+              {
+                "id": "sortBy",
+                "options": {
+                  "fields": {},
+                  "sort": [
+                    {
+                      "desc": true,
+                      "field": "Time"
+                    }
+                  ]
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Unshared Files Stats",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 40
+        },
+        "id": 63,
+        "panels": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "$datasource"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "bars",
+                  "fillOpacity": 39,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "smooth",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "log": 2,
+                    "type": "log"
+                  },
+                  "showPoints": "always",
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "short"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 23,
+              "x": 0,
+              "y": 41
+            },
+            "id": 66,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "sum"
+                ],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "8.0.0-beta3",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url=~\".*download.*\" | __error__=\"\" [$__interval]))",
+                "legendFormat": "{{ user }}",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Downloaded Shared Files by User - Overtime",
+            "transformations": [],
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Nextcloud Version"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 156
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "IP"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 140
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "User"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 157
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 204
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Request ID"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 285
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Uploaded File"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 335
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 23,
+              "x": 0,
+              "y": 49
+            },
+            "id": 67,
+            "options": {
+              "footer": {
+                "enablePagination": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "9.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
+                },
+                "editorMode": "code",
+                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url=~\".*download.*\" | pattern `<_>the token \\\"<download_token>\\\" by \\\"<shared_by_username>\\\" has <_>` | __error__=\"\"",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Downloaded Shared Files - Details",
+            "transformations": [
+              {
+                "id": "extractFields",
+                "options": {
+                  "format": "json",
+                  "replace": true,
+                  "source": "labels"
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "app": true,
+                    "data_app": true,
+                    "env": true,
+                    "filename": true,
+                    "instance": true,
+                    "job": true,
+                    "level": true,
+                    "message": true,
+                    "method": true,
+                    "reqId": false,
+                    "time": false,
+                    "url": true
+                  },
+                  "indexByName": {
+                    "app": 6,
+                    "data_app": 7,
+                    "download_token": 4,
+                    "env": 8,
+                    "filename": 9,
+                    "instance": 10,
+                    "job": 11,
+                    "level": 12,
+                    "message": 14,
+                    "method": 15,
+                    "remoteAddr": 2,
+                    "reqId": 3,
+                    "shared_by_username": 5,
+                    "time": 0,
+                    "url": 16,
+                    "user": 1,
+                    "userAgent": 17,
+                    "version": 13
+                  },
+                  "renameByName": {
+                    "accessed_file": "Accessed File",
+                    "download_token": "Downloaded Share Token",
+                    "env": "",
+                    "instance": "",
+                    "message": "",
+                    "method": "",
+                    "remoteAddr": "IP",
+                    "reqId": "Request ID",
+                    "shared_by_username": "Shared by",
+                    "shared_file": "Shared File",
+                    "time": "Time",
+                    "unshared_file": "Unshared File",
+                    "uploaded_file": "Uploaded File",
+                    "url": "",
+                    "user": "User",
+                    "userAgent": "User Agent",
+                    "version": "Nextcloud Version"
+                  }
+                }
+              },
+              {
+                "id": "sortBy",
+                "options": {
+                  "fields": {},
+                  "sort": [
+                    {
+                      "desc": true,
+                      "field": "Time"
+                    }
+                  ]
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Downloaded Shared Files Stats",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 41
+        },
+        "id": 65,
+        "panels": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "$datasource"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "bars",
+                  "fillOpacity": 39,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "smooth",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "log": 2,
+                    "type": "log"
+                  },
+                  "showPoints": "always",
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "short"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 23,
+              "x": 0,
+              "y": 42
+            },
+            "id": 68,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "sum"
+                ],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": true
+              },
+              "tooltip": {
+                "mode": "single",
+                "sort": "none"
+              }
+            },
+            "pluginVersion": "8.0.0-beta3",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$datasource"
+                },
+                "editorMode": "code",
+                "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url!~\".*download.*\" | __error__=\"\" [$__interval]))",
+                "legendFormat": "{{ user }}",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Accessed Shared Files by User - Overtime",
+            "transformations": [],
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Nextcloud Version"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 156
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "IP"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 140
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "User"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 157
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 204
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Request ID"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 285
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Uploaded File"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 335
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 23,
+              "x": 0,
+              "y": 50
+            },
+            "id": 69,
+            "options": {
+              "footer": {
+                "enablePagination": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "9.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
+                },
+                "editorMode": "code",
+                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url!~\".*download.*\" | pattern `<_>the token \\\"<accessed_token>\\\" by \\\"<shared_by_username>\\\" has <_>` | __error__=\"\"",
+                "queryType": "range",
+                "refId": "A"
+              }
+            ],
+            "title": "Accessed Shared Files - Details",
+            "transformations": [
+              {
+                "id": "extractFields",
+                "options": {
+                  "format": "json",
+                  "replace": true,
+                  "source": "labels"
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "app": true,
+                    "data_app": true,
+                    "env": true,
+                    "filename": true,
+                    "instance": true,
+                    "job": true,
+                    "level": true,
+                    "message": true,
+                    "method": true,
+                    "reqId": false,
+                    "time": false,
+                    "url": true
+                  },
+                  "indexByName": {
+                    "accessed_token": 5,
+                    "app": 6,
+                    "data_app": 7,
+                    "env": 8,
+                    "filename": 9,
+                    "instance": 10,
+                    "job": 11,
+                    "level": 12,
+                    "message": 14,
+                    "method": 15,
+                    "remoteAddr": 2,
+                    "reqId": 3,
+                    "shared_by_username": 4,
+                    "time": 0,
+                    "url": 16,
+                    "user": 1,
+                    "userAgent": 17,
+                    "version": 13
+                  },
+                  "renameByName": {
+                    "accessed_file": "Accessed File",
+                    "accessed_token": "Accessed Share Token",
+                    "env": "",
+                    "instance": "",
+                    "message": "",
+                    "method": "",
+                    "remoteAddr": "IP",
+                    "reqId": "Request ID",
+                    "shared_by_username": "Shared By",
+                    "shared_file": "Shared File",
+                    "time": "Time",
+                    "unshared_file": "Unshared File",
+                    "uploaded_file": "Uploaded File",
+                    "url": "",
+                    "user": "User",
+                    "userAgent": "User Agent",
+                    "version": "Nextcloud Version"
+                  }
+                }
+              },
+              {
+                "id": "sortBy",
+                "options": {
+                  "fields": {},
+                  "sort": [
+                    {
+                      "desc": true,
+                      "field": "Time"
+                    }
+                  ]
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Accessed Shared Files",
+        "type": "row"
+      }
+    ],
+    "refresh": false,
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [
+      "nextcloud",
+      "loki"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "Loki",
+            "value": "Loki"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Datasource",
+          "multi": false,
+          "name": "datasource",
+          "options": [],
+          "query": "loki",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "type": "datasource"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Label Name",
+          "multi": false,
+          "name": "label_name",
+          "options": [],
+          "query": {
+            "label": "",
+            "refId": "LokiVariableQueryEditor-VariableQuery",
+            "stream": "",
+            "type": 0
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "loki",
+            "uid": "$datasource"
+          },
+          "definition": "label_values($label_value)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Label Value",
+          "multi": true,
+          "name": "label_value",
+          "options": [],
+          "query": "label_values($label_name)",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Job",
+          "multi": true,
+          "name": "job",
+          "options": [],
+          "query": {
+            "label": "job",
+            "refId": "LokiVariableQueryEditor-VariableQuery",
+            "stream": "{$label_name=~\"$label_value\"}",
+            "type": 1
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Instance",
+          "multi": true,
+          "name": "instance",
+          "options": [],
+          "query": {
+            "label": "instance",
+            "refId": "LokiVariableQueryEditor-VariableQuery",
+            "stream": "{$label_name=~\"$label_value\"}",
+            "type": 1
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-2d",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Nextcloud Log",
+    "uid": "ILsBP9t4R",
+    "version": 1,
+    "weekStart": ""
+  }
