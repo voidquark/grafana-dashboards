@@ -23,9 +23,9 @@ Log shipper: `promtail`
 
 Log aggregator: `loki`
 
-Grafana dashboard URL: **Published Soon**
+Grafana dashboard URL: [Dashboard ID 17821](https://grafana.com/grafana/dashboards/17821-nextcloud-log/)
 
-How to use this dashboard is described in blog: **Published Soon**
+How to use this dashboard is described in blog: [Parsing Nextcloud Audit Logs with Grafana Loki](https://voidquark.com/parsing-nextcloud-audit-logs-with-grafana-loki/).
 
 ## Author Information
 
