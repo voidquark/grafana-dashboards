@@ -70,9 +70,10 @@
         }
       ]
     },
-    "description": "",
+    "description": "Loki - PrivateBin NGINX JSON Access Log",
     "editable": true,
     "fiscalYearStartMonth": 0,
+    "gnetId": 19507,
     "graphTooltip": 0,
     "id": null,
     "links": [],
@@ -271,7 +272,7 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
+          "w": 4,
           "x": 6,
           "y": 1
         },
@@ -339,6 +340,79 @@
                 }
               ]
             },
+            "unit": "decbytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 10,
+          "y": 1
+        },
+        "id": 11,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.1.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum(bytes_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | __error__=\"\" [$__range]))",
+            "queryType": "instant",
+            "refId": "A"
+          }
+        ],
+        "title": "Access Log in bytes",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
             "unit": "short"
           },
           "overrides": []
@@ -346,7 +420,7 @@
         "gridPos": {
           "h": 4,
           "w": 3,
-          "x": 9,
+          "x": 13,
           "y": 1
         },
         "id": 9,
@@ -386,7 +460,7 @@
         "gridPos": {
           "h": 8,
           "w": 3,
-          "x": 12,
+          "x": 16,
           "y": 1
         },
         "id": 28,
@@ -440,7 +514,7 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
+          "w": 4,
           "x": 0,
           "y": 5
         },
@@ -515,8 +589,8 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 3,
+          "w": 4,
+          "x": 4,
           "y": 5
         },
         "id": 7,
@@ -598,8 +672,8 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 2,
-          "x": 6,
+          "w": 3,
+          "x": 8,
           "y": 5
         },
         "id": 13,
@@ -677,8 +751,8 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 2,
-          "x": 8,
+          "w": 3,
+          "x": 11,
           "y": 5
         },
         "id": 19,
@@ -715,82 +789,9 @@
           "type": "loki",
           "uid": "${DS_LOKI}"
         },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "index": 0,
-                    "text": "0"
-                  }
-                },
-                "type": "special"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "orange",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "decbytes"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 2,
-          "x": 10,
-          "y": 5
-        },
-        "id": 11,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "sum"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "10.1.1",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${DS_LOKI}"
-            },
-            "editorMode": "code",
-            "expr": "sum(bytes_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | __error__=\"\" [$__range]))",
-            "queryType": "instant",
-            "refId": "A"
-          }
-        ],
-        "title": "Access Log in bytes",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${DS_LOKI}"
-        },
         "gridPos": {
           "h": 12,
-          "w": 14,
+          "w": 19,
           "x": 0,
           "y": 9
         },
@@ -903,8 +904,8 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 9,
-          "w": 8,
+          "h": 10,
+          "w": 11,
           "x": 0,
           "y": 22
         },
@@ -1011,8 +1012,8 @@
         },
         "gridPos": {
           "h": 9,
-          "w": 8,
-          "x": 8,
+          "w": 10,
+          "x": 11,
           "y": 22
         },
         "id": 17,
@@ -1052,7 +1053,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 31
+          "y": 32
         },
         "id": 22,
         "panels": [],
@@ -1112,7 +1113,7 @@
           "h": 9,
           "w": 11,
           "x": 0,
-          "y": 32
+          "y": 33
         },
         "id": 21,
         "options": {
@@ -1228,9 +1229,9 @@
         },
         "gridPos": {
           "h": 9,
-          "w": 6,
+          "w": 13,
           "x": 11,
-          "y": 32
+          "y": 33
         },
         "id": 26,
         "options": {
@@ -1350,9 +1351,9 @@
         },
         "gridPos": {
           "h": 13,
-          "w": 7,
+          "w": 9,
           "x": 0,
-          "y": 41
+          "y": 42
         },
         "id": 23,
         "options": {
@@ -1501,8 +1502,8 @@
         "gridPos": {
           "h": 13,
           "w": 7,
-          "x": 7,
-          "y": 41
+          "x": 9,
+          "y": 42
         },
         "id": 24,
         "options": {
@@ -1651,9 +1652,9 @@
         },
         "gridPos": {
           "h": 13,
-          "w": 3,
-          "x": 14,
-          "y": 41
+          "w": 5,
+          "x": 16,
+          "y": 42
         },
         "id": 25,
         "options": {
@@ -1863,6 +1864,6 @@
     "timezone": "",
     "title": "PrivateBin Access Log",
     "uid": "f28fcf36-bfa6-4c44-85aa-fa0dc9d9ce1a",
-    "version": 20,
+    "version": 2,
     "weekStart": ""
   }
