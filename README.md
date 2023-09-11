@@ -35,9 +35,9 @@ Log shipper: `promtail`
 
 Log aggregator: `loki`
 
-Grafana dashboard URL: [Coming Soon](https://voidquark.com)
+Grafana dashboard URL: [Dashboard ID 19507](https://grafana.com/grafana/dashboards/19507-privatebin-access-log/)
 
-How to use this dashboard is described in blog: [Coming Soon](https://voidquark.com).
+How to use this dashboard is described in blog: [PrivateBin NGINX Access Log](https://voidquark.com/privatebin-nginx-access-log-dashboard/).
 
 ## Author Information
 
