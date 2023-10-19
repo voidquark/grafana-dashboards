@@ -1,0 +1,1585 @@
+{
+    "__inputs": [
+      {
+        "name": "DS_LOKI",
+        "label": "loki",
+        "description": "",
+        "type": "datasource",
+        "pluginId": "loki",
+        "pluginName": "Loki"
+      }
+    ],
+    "__elements": {},
+    "__requires": [
+      {
+        "type": "grafana",
+        "id": "grafana",
+        "name": "Grafana",
+        "version": "10.1.4"
+      },
+      {
+        "type": "panel",
+        "id": "logs",
+        "name": "Logs",
+        "version": ""
+      },
+      {
+        "type": "datasource",
+        "id": "loki",
+        "name": "Loki",
+        "version": "1.0.0"
+      },
+      {
+        "type": "panel",
+        "id": "piechart",
+        "name": "Pie chart",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "stat",
+        "name": "Stat",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "table",
+        "name": "Table",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "text",
+        "name": "Text",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Monitor SUDO Logs with JSON Logging",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 8,
+        "panels": [],
+        "title": "Total Stats",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 0,
+          "y": 1
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.1.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"accept\\\":{.*\" | __error__=\"\" [$__range])",
+            "hide": false,
+            "queryType": "instant",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Accepted SUDO Events",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "purple",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 4,
+          "y": 1
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.1.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"reject\\\":{.*\" | __error__=\"\" [$__range])",
+            "hide": false,
+            "queryType": "instant",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Rejected SUDO Events",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {}
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 8,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.1.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"reject\\\":{.*|^{\\\"accept\\\":{.*\" | __error__=\"\" [$__range])",
+            "hide": false,
+            "queryType": "instant",
+            "refId": "A"
+          }
+        ],
+        "title": "SUDO Log Lines",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "index": 0,
+                    "text": "0"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "decbytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 11,
+          "y": 1
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.1.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum(bytes_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"reject\\\":{.*|^{\\\"accept\\\":{.*\" | __error__=\"\" [$__range]))",
+            "queryType": "instant",
+            "refId": "A"
+          }
+        ],
+        "title": "SUDO Log in bytes",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 5,
+          "x": 14,
+          "y": 1
+        },
+        "id": 7,
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "# SUDO JSON Log\n\nCreated by [VoidQuark](https://voidquark.com)\n\n- [Dashboard Source](https://github.com/voidquark/grafana-dashboards)\n\n- Follow me on [X](https://x.com/voidquark) for updates on new and current dashboards.",
+          "mode": "markdown"
+        },
+        "pluginVersion": "10.1.4",
+        "type": "text"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 6,
+          "x": 0,
+          "y": 5
+        },
+        "id": 9,
+        "options": {
+          "displayLabels": [],
+          "legend": {
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.2.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by(accept_submituser) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"accept\\\":{.*\" | __error__=\"\" [$__interval]))",
+            "hide": false,
+            "legendFormat": "{{ accept_submituser }}",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Accepted SUDO Events by User",
+        "transformations": [],
+        "type": "piechart"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "#f7001d",
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 6,
+          "x": 6,
+          "y": 5
+        },
+        "id": 10,
+        "options": {
+          "displayLabels": [],
+          "legend": {
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.2.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "sum by(reject_submituser) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"reject\\\":{.*\" | __error__=\"\" [$__interval]))",
+            "hide": false,
+            "legendFormat": "{{ reject_submituser }}",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Rejected SUDO Events by User",
+        "transformations": [],
+        "type": "piechart"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "gridPos": {
+          "h": 15,
+          "w": 23,
+          "x": 0,
+          "y": 16
+        },
+        "id": 6,
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": true,
+          "sortOrder": "Descending",
+          "wrapLogMessage": false
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"accept\\\":{.*\" | json runargv=\"accept.runargv\" | line_format\"👤 {{ .accept_submituser }} 📂 {{ .accept_submitcwd }} 🎯 {{ .accept_runuser }} 🖥️ {{ .runargv }}\" | __error__=\"\"",
+            "hide": false,
+            "queryType": "range",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"reject\\\":{.*\" | json runargv=\"reject.runargv\" | line_format\"🚫 {{ .reject_reason }} 👤 {{ .reject_submituser }} 📂 {{ .reject_submitcwd }} 🎯 {{ .reject_runuser }} 🖥️ {{ .runargv }}\" | __error__=\"\"",
+            "hide": false,
+            "queryType": "range",
+            "refId": "B"
+          }
+        ],
+        "title": "SUDO Recent Log",
+        "type": "logs"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 31
+        },
+        "id": 11,
+        "panels": [],
+        "title": "Accepted SUDO Events - Details",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 200
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Source User"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 150
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Source PWD"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 200
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Target User"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 150
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Instance"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 200
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Sudo Command"
+              },
+              "properties": [
+                {
+                  "id": "custom.width"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "TTY Name"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 120
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 21,
+          "w": 23,
+          "x": 0,
+          "y": 32
+        },
+        "id": 1,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "10.1.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"accept\\\":{.*\" | json runargv=\"accept.runargv\" | __error__=\"\"",
+            "legendFormat": "",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Accepted SUDO Events Details",
+        "transformations": [
+          {
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "keepTime": true,
+              "replace": true,
+              "source": "labels"
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "accept_columns": true,
+                "accept_command": true,
+                "accept_lines": true,
+                "accept_runcwd": true,
+                "accept_runuid": true,
+                "accept_server_time_iso8601": true,
+                "accept_server_time_localtime": true,
+                "accept_server_time_nanoseconds": true,
+                "accept_server_time_seconds": true,
+                "accept_submit_time_iso8601": true,
+                "accept_submit_time_localtime": true,
+                "accept_submit_time_nanoseconds": true,
+                "accept_submit_time_seconds": true,
+                "accept_submithost": true,
+                "env": true,
+                "filename": true,
+                "instance": false,
+                "job": true,
+                "sudo_json_message": true
+              },
+              "indexByName": {
+                "Time": 0,
+                "accept_columns": 1,
+                "accept_command": 2,
+                "accept_lines": 3,
+                "accept_runcwd": 4,
+                "accept_runuid": 5,
+                "accept_runuser": 8,
+                "accept_server_time_iso8601": 9,
+                "accept_server_time_localtime": 10,
+                "accept_server_time_nanoseconds": 11,
+                "accept_server_time_seconds": 12,
+                "accept_submit_time_iso8601": 13,
+                "accept_submit_time_localtime": 14,
+                "accept_submit_time_nanoseconds": 15,
+                "accept_submit_time_seconds": 16,
+                "accept_submitcwd": 7,
+                "accept_submithost": 18,
+                "accept_submituser": 6,
+                "accept_ttyname": 20,
+                "env": 21,
+                "filename": 22,
+                "instance": 17,
+                "job": 23,
+                "runargv": 19,
+                "sudo_json_message": 24
+              },
+              "renameByName": {
+                "accept_runcwd": "",
+                "accept_runuser": "Target User",
+                "accept_submitcwd": "Source PWD",
+                "accept_submithost": "",
+                "accept_submituser": "Source User",
+                "accept_ttyname": "TTY Name",
+                "instance": "Instance",
+                "runargv": "Sudo Command"
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Time"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": false,
+              "inspect": true
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-purple"
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Count"
+              },
+              "properties": [
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "gauge"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 23,
+          "x": 0,
+          "y": 53
+        },
+        "id": 15,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": [
+              "Value #A"
+            ],
+            "reducer": [
+              "sum"
+            ],
+            "show": true
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "10.1.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "topk(10, sum by (accept_submituser, runargv) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"accept\\\":{.*\" | json runargv=\"accept.runargv\" | __error__=\"\" [$__range])))",
+            "hide": false,
+            "legendFormat": "{{ reject_submituser }} {{ runargv }}",
+            "queryType": "instant",
+            "refId": "A"
+          }
+        ],
+        "title": "Top 10 Accepted SUDO Events by User and Command",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "accept_columns": true,
+                "accept_command": true,
+                "accept_lines": true,
+                "accept_runcwd": true,
+                "accept_runuid": true,
+                "accept_server_time_iso8601": true,
+                "accept_server_time_localtime": true,
+                "accept_server_time_nanoseconds": true,
+                "accept_server_time_seconds": true,
+                "accept_submit_time_iso8601": true,
+                "accept_submit_time_localtime": true,
+                "accept_submit_time_nanoseconds": true,
+                "accept_submit_time_seconds": true,
+                "accept_submithost": true,
+                "env": true,
+                "filename": true,
+                "instance": false,
+                "job": true,
+                "sudo_json_message": true
+              },
+              "indexByName": {
+                "Time": 0,
+                "Value #A": 3,
+                "accept_submituser": 1,
+                "runargv": 2
+              },
+              "renameByName": {
+                "Value #A": "Count",
+                "accept_runcwd": "",
+                "accept_runuser": "Target User",
+                "accept_submitcwd": "Source PWD",
+                "accept_submithost": "",
+                "accept_submituser": "Source User",
+                "accept_ttyname": "TTY Name",
+                "instance": "Instance",
+                "reject_submituser": "User",
+                "runargv": "Sudo Command"
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Count"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 65
+        },
+        "id": 13,
+        "panels": [],
+        "title": "Rejected SUDO Events - Details",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 200
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Source User"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 150
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Source PWD"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 220
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Target User"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 150
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Reject Reason"
+              },
+              "properties": [
+                {
+                  "id": "custom.width"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Instance"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 200
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Sudo Command"
+              },
+              "properties": [
+                {
+                  "id": "custom.width"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "reject_ttyname"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 120
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 21,
+          "w": 23,
+          "x": 0,
+          "y": 66
+        },
+        "id": 14,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "10.1.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"reject\\\":{.*\" | json runargv=\"reject.runargv\" | __error__=\"\"",
+            "legendFormat": "",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Rejected SUDO Events Details",
+        "transformations": [
+          {
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "keepTime": true,
+              "replace": true,
+              "source": "labels"
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "accept_columns": true,
+                "accept_command": true,
+                "accept_lines": true,
+                "accept_runcwd": true,
+                "accept_runuid": true,
+                "accept_server_time_iso8601": true,
+                "accept_server_time_localtime": true,
+                "accept_server_time_nanoseconds": true,
+                "accept_server_time_seconds": true,
+                "accept_submit_time_iso8601": true,
+                "accept_submit_time_localtime": true,
+                "accept_submit_time_nanoseconds": true,
+                "accept_submit_time_seconds": true,
+                "accept_submithost": true,
+                "env": true,
+                "filename": true,
+                "instance": false,
+                "job": true,
+                "reject_columns": true,
+                "reject_command": true,
+                "reject_lines": true,
+                "reject_runcwd": true,
+                "reject_runuid": true,
+                "reject_server_time_iso8601": true,
+                "reject_server_time_localtime": true,
+                "reject_server_time_nanoseconds": true,
+                "reject_server_time_seconds": true,
+                "reject_submit_time_iso8601": true,
+                "reject_submit_time_localtime": true,
+                "reject_submit_time_nanoseconds": true,
+                "reject_submit_time_seconds": true,
+                "reject_submithost": true,
+                "reject_ttyname": false,
+                "sudo_json_message": true
+              },
+              "indexByName": {
+                "Time": 0,
+                "env": 7,
+                "filename": 8,
+                "instance": 5,
+                "job": 9,
+                "reject_columns": 11,
+                "reject_command": 12,
+                "reject_lines": 13,
+                "reject_reason": 4,
+                "reject_runcwd": 14,
+                "reject_runuid": 15,
+                "reject_runuser": 3,
+                "reject_server_time_iso8601": 16,
+                "reject_server_time_localtime": 17,
+                "reject_server_time_nanoseconds": 18,
+                "reject_server_time_seconds": 19,
+                "reject_submit_time_iso8601": 20,
+                "reject_submit_time_localtime": 21,
+                "reject_submit_time_nanoseconds": 22,
+                "reject_submit_time_seconds": 23,
+                "reject_submitcwd": 2,
+                "reject_submithost": 24,
+                "reject_submituser": 1,
+                "reject_ttyname": 25,
+                "runargv": 6,
+                "sudo_json_message": 10
+              },
+              "renameByName": {
+                "accept_runcwd": "",
+                "accept_runuser": "Target User",
+                "accept_submitcwd": "Source PWD",
+                "accept_submithost": "",
+                "accept_submituser": "Source User",
+                "accept_ttyname": "TTY Name",
+                "instance": "Instance",
+                "reject_reason": "Reject Reason",
+                "reject_runuser": "Target User",
+                "reject_submitcwd": "Source PWD",
+                "reject_submituser": "Source User",
+                "runargv": "Sudo Command"
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Time"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": false,
+              "inspect": true
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-purple"
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Count"
+              },
+              "properties": [
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "gauge"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 23,
+          "x": 0,
+          "y": 87
+        },
+        "id": 12,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": [
+              "Value #A"
+            ],
+            "reducer": [
+              "sum"
+            ],
+            "show": true
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "10.1.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "topk(10, sum by (reject_submituser, runargv) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |=\"sudo[\" | pattern `<_> sudo[<_>]<_> <_>:<sudo_json_message>` | line_format\"{{ .sudo_json_message }}\" | json | sudo_json_message=~\"^{\\\"reject\\\":{.*\" | json runargv=\"reject.runargv\" | __error__=\"\" [$__range])))",
+            "hide": false,
+            "legendFormat": "{{ reject_submituser }} {{ runargv }}",
+            "queryType": "instant",
+            "refId": "A"
+          }
+        ],
+        "title": "Top 10 Rejected SUDO Events by User and Command",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "accept_columns": true,
+                "accept_command": true,
+                "accept_lines": true,
+                "accept_runcwd": true,
+                "accept_runuid": true,
+                "accept_server_time_iso8601": true,
+                "accept_server_time_localtime": true,
+                "accept_server_time_nanoseconds": true,
+                "accept_server_time_seconds": true,
+                "accept_submit_time_iso8601": true,
+                "accept_submit_time_localtime": true,
+                "accept_submit_time_nanoseconds": true,
+                "accept_submit_time_seconds": true,
+                "accept_submithost": true,
+                "env": true,
+                "filename": true,
+                "instance": false,
+                "job": true,
+                "sudo_json_message": true
+              },
+              "indexByName": {
+                "Time": 0,
+                "Value #A": 3,
+                "reject_submituser": 1,
+                "runargv": 2
+              },
+              "renameByName": {
+                "Value #A": "Count",
+                "accept_runcwd": "",
+                "accept_runuser": "Target User",
+                "accept_submitcwd": "Source PWD",
+                "accept_submithost": "",
+                "accept_submituser": "Source User",
+                "accept_ttyname": "TTY Name",
+                "instance": "Instance",
+                "reject_submituser": "User",
+                "runargv": "Sudo Command"
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Count"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "table"
+      }
+    ],
+    "refresh": "1m",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [
+      "linux",
+      "loki",
+      "sudo"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "loki",
+            "value": "P982945308D3682D1"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Datasource",
+          "multi": false,
+          "name": "datasource",
+          "options": [],
+          "query": "loki",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "type": "datasource"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Label Name",
+          "multi": false,
+          "name": "label_name",
+          "options": [],
+          "query": {
+            "label": "",
+            "refId": "LokiVariableQueryEditor-VariableQuery",
+            "stream": "",
+            "type": 0
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Label Value",
+          "multi": true,
+          "name": "label_value",
+          "options": [],
+          "query": {
+            "label": "$label_name",
+            "refId": "LokiVariableQueryEditor-VariableQuery",
+            "stream": "",
+            "type": 1
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Job",
+          "multi": true,
+          "name": "job",
+          "options": [],
+          "query": {
+            "label": "job",
+            "refId": "LokiVariableQueryEditor-VariableQuery",
+            "stream": "{$label_name=~\"$label_value\"}",
+            "type": 1
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Instance",
+          "multi": false,
+          "name": "instance",
+          "options": [],
+          "query": {
+            "label": "instance",
+            "refId": "LokiVariableQueryEditor-VariableQuery",
+            "stream": "{$label_name=~\"$label_value\"}",
+            "type": 1
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "SUDO Logs - JSON version",
+    "uid": "e3f0d8c9-ca9f-4a0d-bad6-2f12c6714558",
+    "version": 1,
+    "weekStart": ""
+  }
