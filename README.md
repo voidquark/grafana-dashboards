@@ -15,6 +15,18 @@ Grafana dashboard URL: [Dashboard ID 17514](https://grafana.com/grafana/dashboar
 
 How to use this dashboard is described in blog: [Parsing SSH Logs with Grafana Loki](https://voidquark.com/parsing-ssh-logs-with-grafana-loki/).
 
+## SUDO Logs
+
+Linux SUDO Logs dashboard. Track both accepted and rejected SUDO events.
+
+Log shipper: `promtail`
+
+Log aggregator: `loki`
+
+Grafana dashboard URL: [Coming soon](https://voidquark.com)
+
+How to use this dashboard is described in blog: [Coming soon](https://voidquark.com).
+
 ## Nextcloud Logs
 
 Nextcloud Application and Audit Logs dashboard.
