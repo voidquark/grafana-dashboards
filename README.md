@@ -23,9 +23,9 @@ Log shipper: `promtail`
 
 Log aggregator: `loki`
 
-Grafana dashboard URL: [Coming soon](https://voidquark.com)
+Grafana dashboard URL: [Dashboard ID 19816](https://grafana.com/grafana/dashboards/19816-sudo-logs-json-version/)
 
-How to use this dashboard is described in blog: [Coming soon](https://voidquark.com).
+How to use this dashboard is described in blog: [Parsing SUDO Logs with Grafana Loki](https://voidquark.com/blog/parsing-sudo-logs-with-grafana-loki).
 
 ## Nextcloud Logs
 
