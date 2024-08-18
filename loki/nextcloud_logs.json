@@ -2,7 +2,7 @@
     "__inputs": [
       {
         "name": "DS_LOKI",
-        "label": "Loki",
+        "label": "loki",
         "description": "",
         "type": "datasource",
         "pluginId": "loki",
@@ -15,7 +15,7 @@
         "type": "grafana",
         "id": "grafana",
         "name": "Grafana",
-        "version": "9.3.1"
+        "version": "11.1.4"
       },
       {
         "type": "panel",
@@ -76,9 +76,10 @@
         }
       ]
     },
-    "description": "Nextcloud audit log stats",
+    "description": "Nextcloud audit logs stats",
     "editable": true,
     "fiscalYearStartMonth": 0,
+    "gnetId": 17821,
     "graphTooltip": 0,
     "id": null,
     "links": [],
@@ -145,6 +146,7 @@
           "graphMode": "none",
           "justifyMode": "center",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -152,9 +154,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -222,6 +226,7 @@
           "graphMode": "none",
           "justifyMode": "center",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -229,9 +234,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -302,14 +309,17 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [],
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -392,6 +402,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -399,9 +410,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -415,7 +428,6 @@
           }
         ],
         "title": "Nextcloud Log Lines",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -466,6 +478,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -473,9 +486,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -539,6 +554,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -546,9 +562,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -562,7 +580,6 @@
           }
         ],
         "title": "Total Uploaded Files",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -613,6 +630,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -620,9 +638,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -636,7 +656,6 @@
           }
         ],
         "title": "Total Deleted Files",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -687,6 +706,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -694,9 +714,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -710,7 +732,6 @@
           }
         ],
         "title": "Total Moved/Renamed Files",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -761,6 +782,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -768,9 +790,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -784,7 +808,6 @@
           }
         ],
         "title": "Total Accessed Files",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -835,6 +858,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -842,9 +866,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -858,7 +884,6 @@
           }
         ],
         "title": "INFO Log Lines",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -909,6 +934,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -916,9 +942,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -932,7 +960,6 @@
           }
         ],
         "title": "WARNING Log Lines",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -983,6 +1010,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -990,9 +1018,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -1006,7 +1036,6 @@
           }
         ],
         "title": "Total Downloaded Shared Files",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -1057,6 +1086,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -1064,9 +1094,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -1080,7 +1112,6 @@
           }
         ],
         "title": "Total Accessed Shared Files",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -1131,6 +1162,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -1138,9 +1170,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -1154,7 +1188,6 @@
           }
         ],
         "title": "Total Shared Files",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -1205,6 +1238,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -1212,9 +1246,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -1228,7 +1264,6 @@
           }
         ],
         "title": "Total Unshared Files",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -1279,6 +1314,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -1286,9 +1322,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -1302,7 +1340,6 @@
           }
         ],
         "title": "ERROR Log Lines",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -1353,6 +1390,7 @@
           "graphMode": "none",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "sum"
@@ -1360,9 +1398,11 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.3.1",
+        "pluginVersion": "11.1.4",
         "targets": [
           {
             "datasource": {
@@ -1376,7 +1416,6 @@
           }
         ],
         "title": "FATAL Log Lines",
-        "transformations": [],
         "type": "stat"
       },
       {
@@ -1447,7 +1486,6 @@
           }
         ],
         "title": "Successful Login by User",
-        "transformations": [],
         "type": "piechart"
       },
       {
@@ -1589,7 +1627,6 @@
           }
         ],
         "title": "Failed Login by User",
-        "transformations": [],
         "type": "piechart"
       },
       {
@@ -1650,8 +1687,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     }
                   ]
                 },
@@ -1684,7 +1720,8 @@
             "targets": [
               {
                 "datasource": {
-                  "uid": "$datasource"
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login successful.*\" | __error__=\"\" [$__interval]))",
@@ -1709,7 +1746,9 @@
                 },
                 "custom": {
                   "align": "auto",
-                  "displayMode": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
                   "filterable": true,
                   "inspect": false
                 },
@@ -1718,8 +1757,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -1918,7 +1956,7 @@
         "type": "row"
       },
       {
-        "collapsed": true,
+        "collapsed": false,
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1926,322 +1964,325 @@
           "y": 33
         },
         "id": 43,
-        "panels": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "$datasource"
+        "panels": [],
+        "title": "Failed Login Stats",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "$datasource"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
             },
-            "description": "",
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "drawStyle": "bars",
-                  "fillOpacity": 39,
-                  "gradientMode": "hue",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "lineInterpolation": "smooth",
-                  "lineWidth": 2,
-                  "pointSize": 5,
-                  "scaleDistribution": {
-                    "log": 2,
-                    "type": "log"
-                  },
-                  "showPoints": "always",
-                  "spanNulls": true,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "decimals": 0,
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    }
-                  ]
-                },
-                "unit": "short"
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "bars",
+              "fillOpacity": 39,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
               },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 8,
-              "w": 23,
-              "x": 0,
-              "y": 34
-            },
-            "id": 44,
-            "options": {
-              "legend": {
-                "calcs": [
-                  "sum"
-                ],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
+              "insertNulls": false,
+              "lineInterpolation": "smooth",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "log": 2,
+                "type": "log"
               },
-              "tooltip": {
-                "mode": "single",
-                "sort": "none"
+              "showPoints": "always",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
               }
             },
-            "pluginVersion": "8.0.0-beta3",
-            "targets": [
-              {
-                "datasource": {
-                  "uid": "$datasource"
-                },
-                "editorMode": "code",
-                "expr": "sum by (username) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | pattern `<_>Login failed: <username> (Remote IP: <_>` | __error__=\"\" [$__interval]))",
-                "legendFormat": "{{ username }}",
-                "queryType": "range",
-                "refId": "A"
-              }
-            ],
-            "title": "Failed Login by User - Overtime",
-            "transformations": [],
-            "type": "timeseries"
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            },
+            "unit": "short"
           },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 23,
+          "x": 0,
+          "y": 34
+        },
+        "id": 44,
+        "options": {
+          "legend": {
+            "calcs": [
+              "sum"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.0.0-beta3",
+        "targets": [
           {
             "datasource": {
               "type": "loki",
               "uid": "${DS_LOKI}"
             },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "custom": {
-                  "align": "auto",
-                  "displayMode": "auto",
-                  "filterable": true,
-                  "inspect": false
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
+            "editorMode": "code",
+            "expr": "sum by (username) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | pattern `<_>Login failed: <username> (Remote IP: <_>` | __error__=\"\" [$__interval]))",
+            "legendFormat": "{{ username }}",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Failed Login by User - Overtime",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
               },
-              "overrides": [
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
                 {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Nextcloud Version"
-                  },
-                  "properties": [
-                    {
-                      "id": "custom.width",
-                      "value": 156
-                    }
-                  ]
+                  "color": "green"
                 },
                 {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "IP"
-                  },
-                  "properties": [
-                    {
-                      "id": "custom.width",
-                      "value": 140
-                    }
-                  ]
-                },
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Nextcloud Version"
+              },
+              "properties": [
                 {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "User"
-                  },
-                  "properties": [
-                    {
-                      "id": "custom.width",
-                      "value": 181
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Time"
-                  },
-                  "properties": [
-                    {
-                      "id": "custom.width",
-                      "value": 204
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Request ID"
-                  },
-                  "properties": [
-                    {
-                      "id": "custom.width",
-                      "value": 285
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Uploaded File"
-                  },
-                  "properties": [
-                    {
-                      "id": "custom.width",
-                      "value": 335
-                    }
-                  ]
+                  "id": "custom.width",
+                  "value": 156
                 }
               ]
             },
-            "gridPos": {
-              "h": 14,
-              "w": 23,
-              "x": 0,
-              "y": 42
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "IP"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 140
+                }
+              ]
             },
-            "id": 45,
-            "options": {
-              "footer": {
-                "enablePagination": false,
-                "fields": "",
-                "reducer": [
-                  "sum"
-                ],
-                "show": false
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "User"
               },
-              "showHeader": true,
-              "sortBy": []
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 181
+                }
+              ]
             },
-            "pluginVersion": "9.3.1",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "loki",
-                  "uid": "${DS_LOKI}"
-                },
-                "editorMode": "code",
-                "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | pattern `<_>Login failed: <username> (Remote IP: <_>` | __error__=\"\"",
-                "queryType": "range",
-                "refId": "A"
-              }
-            ],
-            "title": "Failed Login - Details",
-            "transformations": [
-              {
-                "id": "extractFields",
-                "options": {
-                  "format": "json",
-                  "replace": true,
-                  "source": "labels"
-                }
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
               },
-              {
-                "id": "organize",
-                "options": {
-                  "excludeByName": {
-                    "app": true,
-                    "data_app": true,
-                    "env": true,
-                    "filename": true,
-                    "instance": true,
-                    "job": true,
-                    "level": true,
-                    "message": true,
-                    "method": true,
-                    "reqId": false,
-                    "time": false,
-                    "url": true,
-                    "user": true
-                  },
-                  "indexByName": {
-                    "app": 4,
-                    "env": 5,
-                    "filename": 6,
-                    "instance": 7,
-                    "job": 8,
-                    "level": 9,
-                    "message": 11,
-                    "method": 12,
-                    "remoteAddr": 2,
-                    "reqId": 3,
-                    "time": 0,
-                    "url": 13,
-                    "user": 15,
-                    "userAgent": 14,
-                    "username": 1,
-                    "version": 10
-                  },
-                  "renameByName": {
-                    "deleted_file": "Deleted File",
-                    "env": "",
-                    "instance": "",
-                    "message": "",
-                    "method": "",
-                    "remoteAddr": "IP",
-                    "reqId": "Request ID",
-                    "time": "Time",
-                    "uploaded_file": "Uploaded File",
-                    "url": "",
-                    "user": "User",
-                    "userAgent": "User Agent",
-                    "username": "User",
-                    "version": "Nextcloud Version"
-                  }
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 204
                 }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Request ID"
               },
-              {
-                "id": "sortBy",
-                "options": {
-                  "fields": {},
-                  "sort": [
-                    {
-                      "desc": true,
-                      "field": "Time"
-                    }
-                  ]
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 285
                 }
-              }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Uploaded File"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 335
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 14,
+          "w": 23,
+          "x": 0,
+          "y": 42
+        },
+        "id": 45,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": false,
+            "fields": "",
+            "reducer": [
+              "sum"
             ],
-            "type": "table"
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "11.1.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "editorMode": "code",
+            "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | pattern `<_>Login failed: <username> (Remote IP: <_>` | __error__=\"\"",
+            "queryType": "range",
+            "refId": "A"
           }
         ],
-        "title": "Failed Login Stats",
-        "type": "row"
+        "title": "Failed Login - Details",
+        "transformations": [
+          {
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "replace": true,
+              "source": "labels"
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "app": true,
+                "data_app": true,
+                "env": true,
+                "filename": true,
+                "instance": true,
+                "job": true,
+                "level": true,
+                "message": true,
+                "method": true,
+                "reqId": false,
+                "time": false,
+                "url": true,
+                "user": true
+              },
+              "indexByName": {
+                "app": 4,
+                "env": 5,
+                "filename": 6,
+                "instance": 7,
+                "job": 8,
+                "level": 9,
+                "message": 11,
+                "method": 12,
+                "remoteAddr": 2,
+                "reqId": 3,
+                "time": 0,
+                "url": 13,
+                "user": 15,
+                "userAgent": 14,
+                "username": 1,
+                "version": 10
+              },
+              "renameByName": {
+                "deleted_file": "Deleted File",
+                "env": "",
+                "instance": "",
+                "message": "",
+                "method": "",
+                "remoteAddr": "IP",
+                "reqId": "Request ID",
+                "time": "Time",
+                "uploaded_file": "Uploaded File",
+                "url": "",
+                "user": "User",
+                "userAgent": "User Agent",
+                "username": "User",
+                "version": "Nextcloud Version"
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Time"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "table"
       },
       {
         "collapsed": true,
@@ -2249,7 +2290,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 34
+          "y": 56
         },
         "id": 27,
         "panels": [
@@ -2301,8 +2342,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     }
                   ]
                 },
@@ -2335,7 +2375,8 @@
             "targets": [
               {
                 "datasource": {
-                  "uid": "$datasource"
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST|PUT|MKCOL\" | message=~\"File written.*\" | __error__=\"\" [$__interval]))",
@@ -2360,7 +2401,9 @@
                 },
                 "custom": {
                   "align": "auto",
-                  "displayMode": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
                   "filterable": true,
                   "inspect": false
                 },
@@ -2369,8 +2412,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -2573,7 +2615,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 35
+          "y": 57
         },
         "id": 35,
         "panels": [
@@ -2625,8 +2667,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     }
                   ]
                 },
@@ -2659,7 +2700,8 @@
             "targets": [
               {
                 "datasource": {
-                  "uid": "$datasource"
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\"File deleted.*\" | __error__=\"\" [$__interval]))",
@@ -2684,7 +2726,9 @@
                 },
                 "custom": {
                   "align": "auto",
-                  "displayMode": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
                   "filterable": true,
                   "inspect": false
                 },
@@ -2693,8 +2737,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -2898,7 +2941,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 36
+          "y": 58
         },
         "id": 51,
         "panels": [
@@ -2950,8 +2993,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     }
                   ]
                 },
@@ -2984,7 +3026,8 @@
             "targets": [
               {
                 "datasource": {
-                  "uid": "$datasource"
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"MOVE\" | message=~\"File renamed.*\" | __error__=\"\" [$__interval]))",
@@ -3009,7 +3052,9 @@
                 },
                 "custom": {
                   "align": "auto",
-                  "displayMode": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
                   "filterable": true,
                   "inspect": false
                 },
@@ -3018,8 +3063,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -3226,7 +3270,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 37
+          "y": 59
         },
         "id": 47,
         "panels": [
@@ -3278,8 +3322,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     }
                   ]
                 },
@@ -3312,7 +3355,8 @@
             "targets": [
               {
                 "datasource": {
-                  "uid": "$datasource"
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"PUT|GET\" | message=~\"File accessed.*|Preview accessed.*\" | __error__=\"\" [$__interval]))",
@@ -3337,7 +3381,9 @@
                 },
                 "custom": {
                   "align": "auto",
-                  "displayMode": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
                   "filterable": true,
                   "inspect": false
                 },
@@ -3346,8 +3392,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -3551,7 +3596,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 38
+          "y": 60
         },
         "id": 55,
         "panels": [
@@ -3603,8 +3648,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     }
                   ]
                 },
@@ -3637,7 +3681,8 @@
             "targets": [
               {
                 "datasource": {
-                  "uid": "$datasource"
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST\" | message=~\".*shared.*\" | __error__=\"\" [$__interval]))",
@@ -3662,7 +3707,9 @@
                 },
                 "custom": {
                   "align": "auto",
-                  "displayMode": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
                   "filterable": true,
                   "inspect": false
                 },
@@ -3671,8 +3718,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -3877,7 +3923,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 39
+          "y": 61
         },
         "id": 59,
         "panels": [
@@ -3929,8 +3975,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     }
                   ]
                 },
@@ -3963,7 +4008,8 @@
             "targets": [
               {
                 "datasource": {
-                  "uid": "$datasource"
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\".*unshared.*\" | __error__=\"\" [$__interval]))",
@@ -3988,7 +4034,9 @@
                 },
                 "custom": {
                   "align": "auto",
-                  "displayMode": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
                   "filterable": true,
                   "inspect": false
                 },
@@ -3997,8 +4045,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -4204,7 +4251,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 40
+          "y": 62
         },
         "id": 63,
         "panels": [
@@ -4256,8 +4303,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     }
                   ]
                 },
@@ -4290,7 +4336,8 @@
             "targets": [
               {
                 "datasource": {
-                  "uid": "$datasource"
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url=~\".*download.*\" | __error__=\"\" [$__interval]))",
@@ -4315,7 +4362,9 @@
                 },
                 "custom": {
                   "align": "auto",
-                  "displayMode": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
                   "filterable": true,
                   "inspect": false
                 },
@@ -4324,8 +4373,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -4534,7 +4582,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 41
+          "y": 63
         },
         "id": 65,
         "panels": [
@@ -4586,8 +4634,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     }
                   ]
                 },
@@ -4620,7 +4667,8 @@
             "targets": [
               {
                 "datasource": {
-                  "uid": "$datasource"
+                  "type": "loki",
+                  "uid": "${DS_LOKI}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url!~\".*download.*\" | __error__=\"\" [$__interval]))",
@@ -4645,7 +4693,9 @@
                 },
                 "custom": {
                   "align": "auto",
-                  "displayMode": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
                   "filterable": true,
                   "inspect": false
                 },
@@ -4654,8 +4704,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -4860,8 +4909,7 @@
       }
     ],
     "refresh": false,
-    "schemaVersion": 37,
-    "style": "dark",
+    "schemaVersion": 39,
     "tags": [
       "nextcloud",
       "loki"
@@ -4869,11 +4917,7 @@
     "templating": {
       "list": [
         {
-          "current": {
-            "selected": false,
-            "text": "Loki",
-            "value": "Loki"
-          },
+          "current": {},
           "hide": 0,
           "includeAll": false,
           "label": "Datasource",
@@ -4989,8 +5033,8 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "Nextcloud Log",
+    "title": "Nextcloud Logs",
     "uid": "ILsBP9t4R",
-    "version": 1,
+    "version": 2,
     "weekStart": ""
   }
