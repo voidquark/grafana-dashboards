@@ -8,6 +8,7 @@ Grafana Dashboards Collection.
 - [PrivateBin Access Logs](#privatebin-access-logs)
 - [Promtail Metrics and Logs](#promtail-metrics-and-logs)
 - [SSH Logs](#ssh-logs)
+- [Global SSH Logs View](#global-ssh-logs-view)
 - [SUDO Logs](#sudo-logs)
 - [Author Information](#author-information)
 
@@ -60,6 +61,18 @@ Log aggregator: `loki`
 Grafana dashboard URL: [Dashboard ID 17514](https://grafana.com/grafana/dashboards/17514-ssh-logs/)
 
 How to use this dashboard is described in blog: [Parsing SSH Logs with Grafana Loki](https://voidquark.com/blog/parsing-ssh-logs-with-grafana-loki/).
+
+## Global SSH Logs View
+
+Linux Global SSH Logs View dashboard.
+
+Log shipper: `promtail`
+
+Log aggregator: `loki`
+
+Grafana dashboard URL: [Dashboard ID 21750](https://grafana.com/grafana/dashboards/21750-global-ssh-logs-view/)
+
+How to use this dashboard is described in blog: [Global SSH Logs View with Loki](https://voidquark.com/blog/global-ssh-logs-view-with-loki).
 
 ## SUDO Logs
 
