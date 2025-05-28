@@ -101,7 +101,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -163,7 +163,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by(instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login successful.*\" | __error__=\"\" [$__interval]))",
@@ -177,7 +177,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -243,7 +243,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by(instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | __error__=\"\" [$__interval]))",
@@ -264,7 +264,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -324,7 +324,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "count by (remoteAddr) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | __error__=\"\" [$__interval]))",
@@ -357,7 +357,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -419,7 +419,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | __error__=\"\" [$__interval]))",
@@ -433,7 +433,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -495,7 +495,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (bytes_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | __error__=\"\" [$__interval]))",
@@ -509,7 +509,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -571,7 +571,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST|PUT|MKCOL\" | message=~\"File written.*\" | __error__=\"\" [$__interval]))",
@@ -585,7 +585,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -647,7 +647,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\"File deleted.*\" | __error__=\"\" [$__interval]))",
@@ -661,7 +661,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -723,7 +723,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"MOVE\" | message=~\"File renamed.*\" | __error__=\"\" [$__interval]))",
@@ -737,7 +737,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -799,7 +799,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"PUT|GET\" | message=~\"File accessed.*|Preview accessed.*\" | __error__=\"\" [$__interval]))",
@@ -813,7 +813,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "level 1 in log",
         "fieldConfig": {
@@ -875,7 +875,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"1\" | __error__=\"\" [$__interval]))",
@@ -889,7 +889,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "level 2 in log",
         "fieldConfig": {
@@ -951,7 +951,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"2\" | __error__=\"\" [$__interval]))",
@@ -965,7 +965,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -1027,7 +1027,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url=~\".*download.*\" | __error__=\"\" [$__interval]))",
@@ -1041,7 +1041,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -1103,7 +1103,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url!~\".*download.*\" | __error__=\"\" [$__interval]))",
@@ -1117,7 +1117,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -1179,7 +1179,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST\" | message=~\".*shared.*\" | __error__=\"\" [$__interval]))",
@@ -1193,7 +1193,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -1255,7 +1255,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\".*unshared.*\" | __error__=\"\" [$__interval]))",
@@ -1269,7 +1269,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "level 3 in log",
         "fieldConfig": {
@@ -1331,7 +1331,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"3\" | __error__=\"\" [$__interval]))",
@@ -1345,7 +1345,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "description": "level 4 in log",
         "fieldConfig": {
@@ -1407,7 +1407,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (instance) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"4\" | __error__=\"\" [$__interval]))",
@@ -1421,7 +1421,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1475,7 +1475,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login successful.*\" | __error__=\"\" [$__interval]))",
@@ -1491,7 +1491,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "gridPos": {
           "h": 21,
@@ -1514,7 +1514,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"1\" | line_format \"➡️❕ IP {{.remoteAddr}} {{.method}} {{.url }} with 👤 {{.user}} 💬 {{.message }} \"",
@@ -1525,7 +1525,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"2\" | line_format \"➡️⚠️ IP {{.remoteAddr}} {{.method}} {{.url }} with 👤 {{.user}} 💬 {{.message }} \"",
@@ -1536,7 +1536,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"3\" | line_format \"➡️🚨 IP {{.remoteAddr}} {{.method}} {{.url }} with 👤 {{.user}} 💬 {{.message }} \"",
@@ -1547,7 +1547,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | level=\"4\" | line_format \"➡️☠️ IP {{.remoteAddr}} {{.method}} {{.url }} with 👤 {{.user}} 💬 {{.message }} \"",
@@ -1562,7 +1562,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1616,7 +1616,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (username) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | pattern `<_>Login failed: <username> (Remote IP: <_>` | __error__=\"\" [$__interval]))",
@@ -1721,7 +1721,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login successful.*\" | __error__=\"\" [$__interval]))",
@@ -1737,7 +1737,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "fieldConfig": {
               "defaults": {
@@ -1865,7 +1865,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login successful.*\" | __error__=\"\"",
@@ -2052,7 +2052,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (username) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | pattern `<_>Login failed: <username> (Remote IP: <_>` | __error__=\"\" [$__interval]))",
@@ -2067,7 +2067,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "${DS_LOKI}"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -2197,7 +2197,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | message=~\"Login failed.*\" | pattern `<_>Login failed: <username> (Remote IP: <_>` | __error__=\"\"",
@@ -2376,7 +2376,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST|PUT|MKCOL\" | message=~\"File written.*\" | __error__=\"\" [$__interval]))",
@@ -2392,7 +2392,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "fieldConfig": {
               "defaults": {
@@ -2520,7 +2520,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST|PUT|MKCOL\" | message=~\"File written.*\" | pattern `<_>File written to: \\\"<uploaded_file>\\\"\"<_>` | __error__=\"\"",
@@ -2701,7 +2701,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\"File deleted.*\" | __error__=\"\" [$__interval]))",
@@ -2717,7 +2717,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "fieldConfig": {
               "defaults": {
@@ -2845,7 +2845,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\"File deleted.*\" | pattern `<_>File deleted: \\\"<deleted_file>\\\"\"<_>` | __error__=\"\"",
@@ -3027,7 +3027,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"MOVE\" | message=~\"File renamed.*\" | __error__=\"\" [$__interval]))",
@@ -3043,7 +3043,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "fieldConfig": {
               "defaults": {
@@ -3171,7 +3171,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"MOVE\" | message=~\"File renamed.*\" | pattern `<_>File renamed: \\\"<original_file>\\\" to \\\"<renamed_or_moved_file>\\\"\"<_>` | __error__=\"\"",
@@ -3356,7 +3356,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"PUT|GET\" | message=~\"File accessed.*|Preview accessed.*\" | __error__=\"\" [$__interval]))",
@@ -3372,7 +3372,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "fieldConfig": {
               "defaults": {
@@ -3500,7 +3500,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"PUT|GET\" | message=~\"File accessed.*|Preview accessed.*\" | pattern `<_>File accessed: \\\"<accessed_file>\\\"\"<_>` | __error__=\"\"",
@@ -3682,7 +3682,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST\" | message=~\".*shared.*\" | __error__=\"\" [$__interval]))",
@@ -3698,7 +3698,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "fieldConfig": {
               "defaults": {
@@ -3826,7 +3826,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"POST\" | message=~\".*shared.*\" | pattern `<_>The <_> \\\"<shared_file>\\\" with ID<_>` | __error__=\"\"",
@@ -4009,7 +4009,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\".*unshared.*\" | __error__=\"\" [$__interval]))",
@@ -4025,7 +4025,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "fieldConfig": {
               "defaults": {
@@ -4153,7 +4153,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"DELETE\" | message=~\".*unshared.*\" | pattern `<_>The <_> \\\"<unshared_file>\\\" with ID<_>` | __error__=\"\"",
@@ -4337,7 +4337,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url=~\".*download.*\" | __error__=\"\" [$__interval]))",
@@ -4353,7 +4353,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "fieldConfig": {
               "defaults": {
@@ -4481,7 +4481,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url=~\".*download.*\" | pattern `<_>the token \\\"<download_token>\\\" by \\\"<shared_by_username>\\\" has <_>` | __error__=\"\"",
@@ -4668,7 +4668,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "sum by (user) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url!~\".*download.*\" | __error__=\"\" [$__interval]))",
@@ -4684,7 +4684,7 @@
           {
             "datasource": {
               "type": "loki",
-              "uid": "${DS_LOKI}"
+              "uid": "${datasource}"
             },
             "fieldConfig": {
               "defaults": {
@@ -4812,7 +4812,7 @@
               {
                 "datasource": {
                   "type": "loki",
-                  "uid": "${DS_LOKI}"
+                  "uid": "${datasource}"
                 },
                 "editorMode": "code",
                 "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | method=~\"GET\" | message=~\".*shared.*accesse.*\" | url!~\".*download.*\" | pattern `<_>the token \\\"<accessed_token>\\\" by \\\"<shared_by_username>\\\" has <_>` | __error__=\"\"",
@@ -4917,7 +4917,9 @@
     "templating": {
       "list": [
         {
-          "current": {},
+          "current": {
+            "value": "${DS_LOKI}"
+          },
           "hide": 0,
           "includeAll": false,
           "label": "Datasource",
@@ -4934,7 +4936,7 @@
           "current": {},
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "${datasource}"
           },
           "definition": "",
           "hide": 0,
@@ -4979,7 +4981,7 @@
           "current": {},
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "${datasource}"
           },
           "definition": "",
           "hide": 0,
@@ -5004,7 +5006,7 @@
           "current": {},
           "datasource": {
             "type": "loki",
-            "uid": "${DS_LOKI}"
+            "uid": "$datasource"
           },
           "definition": "",
           "hide": 0,
